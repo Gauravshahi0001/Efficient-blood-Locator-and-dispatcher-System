@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - Efficient Blood Bank Locator</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS Animation -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <style>
+    body {
+      background: url('https://images.unsplash.com/photo-1615461066159-fea0960485d5?q=80&w=1316&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+      color: #333;
+    }
+
+    .content-section {
+      padding: 60px 20px;
+    }
+
+    h1, h2 {
+      color: #c30010;
+    }
+
+    .feature-box, .team-card, .contact-box {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      padding: 30px 20px;
+      transition: 0.3s;
+    }
+
+    .feature-box:hover, .team-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-box i, .contact-box i {
+      font-size: 40px;
+      color: #c30010;
+      margin-bottom: 15px;
+    }
+
+    .team-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        background-attachment: scroll;
+      }
+      .feature-box, .team-card, .contact-box {
+        padding: 20px 15px;
+      }
+    }
+
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #004d99;">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="images/logo.png" alt="Logo" width="60" height="60" class="rounded-circle mr-2">
+      <h3 class="mb-0 text-white">BloodSync</h3>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto text-uppercase">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="donate.html">Donate Blood</a></li>
+        <li class="nav-item"><a class="nav-link" href="donor-register.html">Register</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#locator">Locator</a></li>
+        <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="map.html">Find on Map</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- About Section -->
+<div class="content-section">
+  <div class="container">
+    <h1 class="text-center mb-4" data-aos="fade-down"><i class="fas fa-heartbeat"></i> About Us</h1>
+    <p class="lead text-center mb-5" data-aos="fade-up">
+      We are dedicated to bridging the gap between blood seekers and blood banks.
+      With real-time data and intelligent filtering, we ensure help is only a few clicks away.
+    </p>
+
+    <div class="row">
+      <div class="col-md-4 mb-4" data-aos="zoom-in">
+        <div class="feature-box text-center h-100">
+          <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+          <h5>Smart Location-Based Search</h5>
+          <p>Find nearby blood banks instantly using location tools and filters.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="100">
+        <div class="feature-box text-center h-100">
+          <i class="fas fa-hand-holding-heart" aria-hidden="true"></i>
+          <h5>Donor Registration</h5>
+          <p>Register as a donor and help others during emergencies.</p>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4" data-aos="zoom-in" data-aos-delay="200">
+        <div class="feature-box text-center h-100">
+          <i class="fas fa-hospital" aria-hidden="true"></i>
+          <h5>Live Blood Bank Info</h5>
+          <p>Access updated blood bank details including contacts and availability.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <h2 class="text-center mt-5" data-aos="fade-down">Meet Our Team</h2>
+    <div class="row justify-content-center mt-4">
+      <div class="col-md-3 mb-4" data-aos="flip-left">
+        <div class="team-card text-center">
+          <img src="images/gaurav.jpg" alt="Gaurav Shahi" class="team-img">
+          <h5>Gaurav Shahi</h5>
+          <p>Software Engineer</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <h2 class="text-center mt-5" data-aos="fade-up">Get in Touch</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-6" data-aos="fade-up" data-aos-delay="100">
+        <div class="contact-box text-center">
+          <i class="fas fa-envelope" aria-hidden="true"></i>
+          <p>Email: <a href="mailto:help@bloodlocator.com">help@bloodlocator.com</a></p>
+          <p>Phone: +91-9876543210</p>
+          <p>
+            Follow us on 
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a> 
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Scroll to Top Button -->
+<button onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" class="btn btn-danger rounded-circle scroll-top-btn">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Footer -->
+<footer class="text-white pt-4 pb-3" style="background-color: #004d99;">
+  <div class="container text-center text-md-left">
+    <div class="row">
+
+      <!-- About -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">BloodSync</h5>
+        <p>Your trusted partner in locating and donating blood efficiently and safely.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+          <li><a href="donate.html" class="text-white text-decoration-none">Donate Blood</a></li>
+          <li><a href="donor-register.html" class="text-white text-decoration-none">Register</a></li>
+          <li><a href="map.html" class="text-white text-decoration-none">Find on Map</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Icons -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Follow Us</h5>
+        <a href="https://facebook.com" target="_blank" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="text-white me-3" aria-label="WhatsApp"><i class="fab fa-whatsapp fa-lg"></i></a>
+        <a href="https://instagram.com" target="_blank" class="text-white me-3" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+      </div>
+
+    </div>
+    <div class="text-center mt-3 border-top pt-2">
+      <small>© 2025 <strong>BloodSync</strong>. All rights reserved.</small>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init();
+</script>
+
+</body>
+</html>

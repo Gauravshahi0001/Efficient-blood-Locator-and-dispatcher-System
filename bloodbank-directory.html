@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blood Bank Directory</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+  <style>
+    body {
+      background-image: url('images/bg3.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      padding-top: 100px;
+    }
+    footer {
+      text-align: center;
+      padding: 15px 0;
+    }
+
+    .directory-table {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+header, footer {
+  
+      background-color: #06236e;
+      color: rgb(72, 57, 168);
+    }
+    h2 {
+      color: #dc3545;
+    }
+     footer a:hover {
+  color: #ffd700 !important;
+  text-decoration: underline;
+}
+
+    .filter-row {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+
+
+<body onload="checkLogin()">
+<header class="py-3 shadow-sm fixed-top" style="background-color: #004d99; z-index: 1030;">
+  <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+    <div class="d-flex align-items-center mb-3 mb-md-0">
+      <img src="images/logo.png" alt="BloodSync Logo" width="80" height="75" class="rounded-circle me-3">
+      <h2 class="mb-0 text-white">BloodSync | Blood Bank Directory</h2>
+    </div>
+    <nav class="d-none d-md-flex">
+      <a class="nav-link text-white ms-3 fs-5" href="#donors">Donors</a>
+      <a class="nav-link text-white ms-3 fs-5" href="#requests">Requests</a>
+      <a class="nav-link text-white ms-3 fs-5" href="index.html">Home</a>
+    </nav>
+  </div>
+</header>
+
+
+
+
+
+  <!-- Header -->
+  <section class="text-center my-4">
+    <h2>Verified Blood Bank Directory</h2>
+    <p class="lead">Find verified blood banks with contact and location details.</p>
+  </section>
+
+  <!-- Filters -->
+  <div class="container directory-table">
+    <div class="form-row filter-row">
+      <div class="form-group col-md-6">
+        <label for="filterState">Filter by State</label>
+        <select class="form-control" id="filterState" onchange="filterTable()">
+          <option value="">All States</option>
+          <option>Delhi</option>
+          <option>Bihar</option>
+          <option>Maharashtra</option>
+          <option>Tamil Nadu</option>
+          <option>Karnataka</option>
+          <option>Chandigarh</option>
+          <option>Rajasthan</option>
+          <option>Puducherry</option>
+          <option>Telangana</option>
+          <option>Odisha</option>
+          <option>West Bengal</option>
+          <option>Andhra Pradesh</option>
+          <option>Kerala</option>
+          <option>Uttar Pradesh</option>
+
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="filterCity">Filter by City</label>
+        <input type="text" class="form-control" id="filterCity" placeholder="Enter city name" oninput="filterTable()">
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Name</th>
+            <th>State</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Contact</th>
+            <th>Google Maps</th>
+            <th>Available Blood Types</th>
+          </tr>
+        </thead>
+        <tbody id="bloodBankTableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    const bloodBankData = [
+  {
+    name: "AIIMS Delhi",
+    state: "Delhi",
+    district: "New Delhi",
+    city: "Delhi",
+    contact: "011-26588500",
+    lat: 28.5672,
+    lng: 77.2100,
+    stock: { "A+": 12, "B+": 5, "O+": 8, "AB+": 2, "A-": 0, "B-": 3, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Patna Medical College",
+    state: "Bihar",
+    district: "Patna",
+    city: "Patna",
+    contact: "0612-2540323",
+    lat: 25.6110,
+    lng: 85.1440,
+    stock: { "A+": 3, "B+": 0, "O+": 4, "AB+": 1, "A-": 1, "B-": 0, "O-": 2, "AB-": 0 }
+  },
+  {
+    name: "Mumbai Blood Center",
+    state: "Maharashtra",
+    district: "Mumbai",
+    city: "Mumbai",
+    contact: "022-12345678",
+    lat: 19.0760,
+    lng: 72.8777,
+    stock: { "A+": 0, "B+": 4, "O+": 6, "AB+": 2, "A-": 1, "B-": 1, "O-": 0, "AB-": 2 }
+  },
+  {
+    name: "Chennai Blood Bank",
+    state: "Tamil Nadu",
+    district: "Chennai",
+    city: "Chennai",
+    contact: "044-98765432",
+    lat: 13.0827,
+    lng: 80.2707,
+    stock: { "A+": 6, "B+": 2, "O+": 3, "AB+": 0, "A-": 1, "B-": 2, "O-": 1, "AB-": 1 }
+  },
+  {
+    name: "Bengaluru Red Cross",
+    state: "Karnataka",
+    district: "Bengaluru",
+    city: "Bangalore",
+    contact: "080-33445566",
+    lat: 12.9716,
+    lng: 77.5946,
+    stock: { "A+": 7, "B+": 2, "O+": 5, "AB+": 3, "A-": 1, "B-": 0, "O-": 2, "AB-": 0 }
+  },
+  {
+    name: "PGIMER Chandigarh",
+    state: "Chandigarh",
+    district: "Chandigarh",
+    city: "Chandigarh",
+    contact: "0172-2747585",
+    lat: 30.7333,
+    lng: 76.7794,
+    stock: { "A+": 4, "B+": 6, "O+": 2, "AB+": 1, "A-": 1, "B-": 1, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Sawai Man Singh Hospital",
+    state: "Rajasthan",
+    district: "Jaipur",
+    city: "Jaipur",
+    contact: "0141-2560291",
+    lat: 26.9124,
+    lng: 75.7873,
+    stock: { "A+": 5, "B+": 5, "O+": 7, "AB+": 3, "A-": 2, "B-": 0, "O-": 2, "AB-": 1 }
+  },
+  {
+    name: "Lucknow Civil Hospital",
+    state: "Uttar Pradesh",
+    district: "Lucknow",
+    city: "Lucknow",
+    contact: "0522-2622080",
+    lat: 26.8467,
+    lng: 80.9462,
+    stock: { "A+": 3, "B+": 4, "O+": 4, "AB+": 2, "A-": 1, "B-": 2, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Indira Gandhi Hospital",
+    state: "Puducherry",
+    district: "Puducherry",
+    city: "Pondicherry",
+    contact: "0413-2271200",
+    lat: 11.9416,
+    lng: 79.8083,
+    stock: { "A+": 2, "B+": 1, "O+": 5, "AB+": 0, "A-": 1, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Gandhi Hospital",
+    state: "Telangana",
+    district: "Hyderabad",
+    city: "Hyderabad",
+    contact: "040-27505566",
+    lat: 17.3850,
+    lng: 78.4867,
+    stock: { "A+": 4, "B+": 3, "O+": 4, "AB+": 1, "A-": 0, "B-": 0, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "SCB Medical College",
+    state: "Odisha",
+    district: "Cuttack",
+    city: "Cuttack",
+    contact: "0671-2414304",
+    lat: 20.4625,
+    lng: 85.8828,
+    stock: { "A+": 5, "B+": 2, "O+": 2, "AB+": 1, "A-": 2, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "North Bengal Medical College",
+    state: "West Bengal",
+    district: "Darjeeling",
+    city: "Siliguri",
+    contact: "0353-2585478",
+    lat: 26.7141,
+    lng: 88.4410,
+    stock: { "A+": 3, "B+": 3, "O+": 6, "AB+": 2, "A-": 1, "B-": 0, "O-": 1, "AB-": 1 }
+  },
+  {
+    name: "Indira Gandhi Institute of Medical Sciences",
+    state: "Bihar",
+    district: "Patna",
+    city: "Patna",
+    contact: "0612-2297099",
+    lat: 25.6105,
+    lng: 85.1446,
+    stock: { "A+": 2, "B+": 4, "O+": 3, "AB+": 1, "A-": 0, "B-": 2, "O-": 2, "AB-": 1 }
+  },
+  {
+    name: "Andhra Medical College",
+    state: "Andhra Pradesh",
+    district: "Visakhapatnam",
+    city: "Visakhapatnam",
+    contact: "0891-2561157",
+    lat: 17.6868,
+    lng: 83.2185,
+    stock: { "A+": 4, "B+": 4, "O+": 3, "AB+": 0, "A-": 2, "B-": 1, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Government Medical College",
+    state: "Kerala",
+    district: "Thiruvananthapuram",
+    city: "Trivandrum",
+    contact: "0471-2528386",
+    lat: 8.5241,
+    lng: 76.9366,
+    stock: { "A+": 5, "B+": 2, "O+": 6, "AB+": 2, "A-": 1, "B-": 0, "O-": 1, "AB-": 1 }
+  }
+];
+
+
+    function displayTable(data) {
+      const tableBody = document.getElementById("bloodBankTableBody");
+      tableBody.innerHTML = "";
+
+      data.forEach(bank => {
+        const bloodTypes = Object.entries(bank.stock)
+          .filter(([_, count]) => count > 0)
+          .map(([type, count]) => `${type}: ${count}`)
+          .join(", ");
+
+        const mapUrl = `https://www.google.com/maps?q=${bank.lat},${bank.lng}`;
+
+        const row = `
+          <tr>
+            <td>${bank.name}</td>
+            <td>${bank.state}</td>
+            <td>${bank.district}</td>
+            <td>${bank.city}</td>
+            <td>${bank.contact}</td>
+            <td><a href="${mapUrl}" target="_blank">View</a></td>
+            <td>${bloodTypes || 'N/A'}</td>
+          </tr>
+        `;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    function filterTable() {
+      const selectedState = document.getElementById("filterState").value.toLowerCase();
+      const enteredCity = document.getElementById("filterCity").value.toLowerCase();
+
+      const filtered = bloodBankData.filter(bank =>
+        (selectedState === "" || bank.state.toLowerCase() === selectedState) &&
+        (enteredCity === "" || bank.city.toLowerCase().includes(enteredCity))
+      );
+
+      displayTable(filtered);
+    }
+
+    // Initial display
+    displayTable(bloodBankData);
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- FOOTER -->
+<footer class="text-white pt-4 pb-3" style="background-color: #004d99;">
+  <div class="container text-center text-md-left">
+    <div class="row">
+
+      <!-- About Section -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">BloodSync</h5>
+        <p>Empowering lives through blood donation. Join us to save lives with just a drop.</p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="dashboard.html" class="text-white text-decoration-none">Dashboard</a></li>
+          <li><a href="#donors" class="text-white text-decoration-none">Donors</a></li>
+          <li><a href="#requests" class="text-white text-decoration-none">Requests</a></li>
+          <li><a href="index.html" class="text-white text-decoration-none">Home</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="col-md-4 mb-3">
+        <h5 class="text-uppercase">Connect With Us</h5>
+        <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+        <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+        <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-linkedin fa-lg"></i></a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="text-center mt-3 border-top pt-2">
+    <small>© 2025 <strong>BloodSync</strong>. All rights reserved.</small>
+  </div>
+</footer>
+
+<!-- Scroll-to-Top Button -->
+<button onclick="topFunction()" id="scrollTopBtn" title="Go to top">↑</button>
+
+
+</body>
+</html>

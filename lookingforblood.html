@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Looking for Blood - BloodSync</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- AOS Animation -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+</head>
+
+<body style="
+  background: url('images/bg9.png') no-repeat center center fixed;
+  background-size: cover;
+  background-attachment: fixed;
+">
+
+ <nav class="navbar navbar-expand-lg navbar-dark shadow-lg" style="
+  background: linear-gradient(90deg, #a30000, #001F5B);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+">
+  <a class="navbar-brand d-flex align-items-center" href="index.html">
+    <img src="images/logo.png" width="60" height="60" class="rounded-circle mr-2" alt="BloodSync Logo">
+    <span class="font-weight-bold text-white" style="font-size: 1.5rem;">BloodSync</span>
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link text-white">
+          <i class="fas fa-home mr-1"></i> Home
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+  <!-- Header Section -->
+  <header class="bg-light text-center py-5">
+    <div class="container" data-aos="fade-down">
+      <h1 class="text-danger font-weight-bold">Looking for Blood?</h1>
+      <p class="lead">Choose from the options below to find what you need quickly.</p>
+    </div>
+  </header>
+
+  <!-- Options Section -->
+  <section class="container py-5">
+    <div class="row text-center">
+
+      <!-- Option 1: Availability -->
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <i class="fas fa-tint fa-3x text-danger mb-3"></i>
+            <h5 class="card-title">Check Blood Availability</h5>
+            <p class="card-text">View current stock of blood types in real time.</p>
+            <a href="availability.html" class="btn btn-outline-danger">View Availability</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 2: Directory -->
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <i class="fas fa-hospital fa-3x text-danger mb-3"></i>
+            <h5 class="card-title">Blood Bank Directory</h5>
+            <p class="card-text">Find verified blood banks with contact & location details.</p>
+            <a href="bloodbank-directory.html" class="btn btn-outline-danger">Explore Directory</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Option 3: Request -->
+      <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+        <div class="card shadow h-100">
+          <div class="card-body">
+            <i class="fas fa-notes-medical fa-3x text-danger mb-3"></i>
+            <h5 class="card-title">Thalassemia Blood Request</h5>
+            <p class="card-text">Submit urgent requests for Thalassemia patients.</p>
+            <a href="request.html" class="btn btn-outline-danger">Request Blood</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+   <!-- Footer -->
+ <footer class="text-white text-center py-3 fixed-bottom" style="
+  background: linear-gradient(90deg, #a30000, #001F5B);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+">
+
+    <div class="container">
+      <div class="mb-2">
+        <a href="https://facebook.com" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram">
+        </a>
+     <a href="https://linkedIn.com" target="_blank" class="text-white mx-2">
+    <img src="https://cdn-icons-png.flaticon.com/24/174/174857.png" alt="LinkedIn">
+</a>
+
+
+      </div>
+      <p class="mb-0">© 2025 BloodSync. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- JS Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+</body>
+</html>

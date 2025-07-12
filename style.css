@@ -1,0 +1,948 @@
+/* General Body Styling */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
+  background: linear-gradient(to bottom, #fff, #f2f2f2);
+  scroll-behavior: smooth;
+  height: 100%;
+  overflow-x: hidden;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+   position: relative; /* Ensure this is set for the ::before element to position correctly */
+    overflow-x: hidden; /* Prevent horizontal scroll for the pseudo-element */
+}
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%; /* Adjusted width for the wave */
+    height: 100%; /* Or fixed height if the pattern repeats */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 229, 229, 0.5) 50%, rgba(255, 204, 204, 0.7) 100%);
+    transform: skewX(-20deg) translateX(40%); /* Adjust skew and translateX to match the angle and position */
+    transform-origin: top right;
+    z-index: -1; /* Send to back */
+}
+
+
+/* Navigation Bar */
+.navbar {
+  background-color: #dc3545 !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: white !important;
+}
+
+.nav-link {
+  font-size: 1.1rem;
+  color: white !important;
+  margin-left: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  padding: 0.6rem 1.1rem;
+  transition: color 0.2s ease-in-out;
+}
+
+.nav-link:hover,
+.nav-link:focus {
+  text-decoration: underline;
+  color: #F0F0F0 !important;
+}
+
+.navbar .nav-link.btn {
+  border: none !important;
+  background: none !important;
+  padding: 0.6rem 1.1rem;
+}
+
+.navbar-brand span {
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+}
+
+/* Hero Section with Background */
+.hero-section {
+  height: 100vh;
+  width: 100%;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-section h1,
+.hero-section p {
+  position: relative;
+  z-index: 2;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero-section h1 {
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 4px #000;
+}
+
+.hero-section p {
+  font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+  text-shadow: 1px 1px 2px #000;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* About Section */
+.about {
+  padding: 4rem 2rem;
+  background-color: #fff;
+  text-align: center;
+}
+
+.about h2,
+.about h3 {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.about p {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.about ul li {
+  margin-bottom: 0.6rem;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+.about ul i {
+  font-size: 1.3rem;
+  margin-right: 8px;
+}
+
+.about img.rounded-circle {
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Map Styling */
+#map {
+  width: 100%;
+  height: 600px;
+  border: 2px solid #dc3545;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+}
+
+/* Carousel */
+.carousel-item {
+  transition: transform 0.6s ease-in-out;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  padding: 1rem 2rem;
+}
+
+.carousel-caption h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  color: white;
+}
+
+.carousel-caption p {
+  font-size: 1.25rem;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);
+  color: #f1f1f1;
+}
+
+@media (max-width: 768px) {
+  .carousel-caption h1 {
+    font-size: 1.8rem;
+  }
+
+  .carousel-caption p {
+    font-size: 1rem;
+  }
+
+  .carousel-caption {
+    bottom: 15%;
+    padding: 0 10px;
+  }
+}
+
+/* Tables */
+.table {
+  font-size: 1rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.table thead th {
+  background-color: #dc3545;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: #fff5f5;
+}
+
+.table tbody tr:hover {
+  background-color: #ffecec;
+  cursor: pointer;
+}
+
+.table td {
+  vertical-align: middle;
+}
+
+/* Hero Background */
+#hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Request/Register Section */
+.request-register-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 220px;
+  background: linear-gradient(to right, #ffcccc, #ffe6e6);
+}
+
+.request-register-section .btn {
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 16px 40px;
+  border-radius: 50px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.request-register-section .btn:hover {
+  transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+  padding: 1.2rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #555;
+  background: #f8f9fa;
+  margin-top: 3rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 1.5rem;
+    height: auto;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.2rem;
+  }
+
+  .table {
+    font-size: 0.9rem;
+  }
+
+  .navbar-brand {
+    font-size: 1.4rem;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+  }
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+.dark-mode .navbar {
+  background-color: #222 !important;
+}
+
+.dark-mode .carousel-caption {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .table,
+.dark-mode .table th,
+.dark-mode .table td {
+  color: #fff;
+  background-color: #2c2c2c;
+}
+
+body.dark-mode .navbar {
+  background-color: #333 !important;
+}
+
+body.dark-mode .nav-link {
+  color: #F0F0F0 !important;
+}
+
+/* Shared background */
+.bg-blood-wrapper {
+  position: relative;
+  background: url("images/bg.jpg") center/cover no-repeat fixed;
+  color: #fff;
+}
+
+.bg-blood-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 50, .6);
+  z-index: 0;
+}
+
+.bg-blood-wrapper > section,
+.bg-blood-wrapper > section * {
+  position: relative;
+  z-index: 1;
+}
+
+#need-blood,
+#locator {
+  background: transparent !important;
+}
+
+.card:hover {
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+/* Brand text */
+.erakt‑red {
+  background-color: #D80000;
+}
+
+.brand-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Hero white background & droplet watermark */
+#hero-ministers {
+  background: #fff;
+  position: relative;
+}
+
+#hero-ministers .droplet-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  opacity: .06;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Circular images */
+.person-img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid #fff;
+}
+
+/* Quick search bar */
+#quick-search input {
+  border: 2px solid #D80000;
+  border-radius: 50px;
+  padding: .9rem 1.5rem;
+}
+
+#quick-search input:focus {
+  box-shadow: 0 0 0 .15rem rgba(216, 0, 0, .25);
+  outline: none;
+}
+/* ------------------ Core layout tweaks ------------------ */
+#mainNav           { background-color:#D80000; }
+#map-section       { background-color:#F5F5F5; }
+footer             { background-color:#004d99; }
+#map               { height:600px; width:100%; border-radius:8px; }
+
+/* Typography / utility */
+.logo-text         { font-size:1.5rem; }
+.text-shadow       { text-shadow:2px 2px 4px #000; }
+
+/* Dark‑mode palette */
+body.dark-mode               { background-color:#121212; color:#ffffff; }
+body.dark-mode a:not(.btn)   { color:#aad6ff; }
+body.dark-mode .card,
+body.dark-mode .navbar,
+body.dark-mode table         { background-color:#1f1f1f; }
+
+/* Dark‑mode navbar override */
+body.dark-mode #mainNav      { background-color:#161616; }
+
+/* Dark‑mode footer */
+body.dark-mode footer        { background-color:#002b66; }
+
+/* Dark‑mode table headers */
+body.dark-mode thead.thead-dark th {
+  background-color:#2a2a2a;
+  color:#fff;
+}
+
+/* Toggle‑icon sizing */
+.dark-toggle {
+  width:32px; height:32px; cursor:pointer; margin-left:12px;
+}
+
+/* Optional feel‑good colour for headings inside #locator */
+#locator h2 { letter-spacing:0.2px; }
+
+/* Add any extra custom rules below
+----------------------------------------------------------- */
+.bg-danger h4 {
+  font-size: 2rem;
+}
+
+.bg-danger small {
+  font-size: 1rem;
+}
+.card img {
+  height: 80px;
+}
+.card h5 {
+  color: #333;
+}
+.about-image {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  border-radius: 12px;
+}
+.card-body ul li {
+  margin-bottom: 0.6rem;
+}
+.border-left-danger {
+  border-left: 5px solid #dc3545 !important;
+}
+.border-left-success {
+  border-left: 5px solid #28a745 !important;
+}
+.card-body .row > div {
+  font-size: 1.05rem;
+}
+.btn-outline-danger.active,
+.btn-outline-danger:focus {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+.border-left-danger {
+  border-left: 5px solid #dc3545 !important;
+}
+.border-left-success {
+  border-left: 5px solid #28a745 !important;
+}
+.btn-outline-danger.active {
+  background-color: #dc3545;
+  color: white;
+  border-color: #dc3545;
+}
+
+        /* Custom CSS to match the screenshot */
+        body {
+            background-color: #f8f9fa; /* Light background for the overall page */
+        }
+
+        .py-5 {
+            padding-top: 3rem !important;
+            padding-bottom: 3rem !important;
+        }
+
+        .container {
+            max-width: 1000px; /* Adjust as needed */
+        }
+
+        .learn-about-donation-title {
+            color: #dc3545; /* Red color */
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2.5rem; /* Larger font size for the title */
+        }
+
+        .blood-type-selection {
+            background-color: #fff; /* White background for the selection area */
+            padding: 1.5rem;
+            border-radius: .5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 2rem;
+        }
+
+        .blood-type-buttons .btn {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 0.3rem;
+            border: 1px solid #dc3545; /* Red border */
+            color: #dc3545; /* Red text */
+            background-color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .blood-type-buttons .btn:hover,
+        .blood-type-buttons .btn.active {
+            background-color: #dc3545; /* Red background on hover/active */
+            color: #fff; /* White text on hover/active */
+            border-color: #dc3545;
+        }
+
+        /* Specific styling for the selected A+ button from the screenshot */
+        .blood-type-buttons .btn-primary-custom {
+            background-color: #dc3545; /* Red background */
+            color: #fff; /* White text */
+            border-color: #dc3545;
+        }
+
+        .compatibility-card {
+            border: none; /* Remove default card border */
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-bottom: 1.5rem;
+            overflow: hidden; /* For rounded corners on the background */
+        }
+
+        .compatibility-card .card-body {
+            padding: 1.5rem;
+        }
+
+        .compatibility-card h4 {
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .compatibility-card h4 img {
+            width: 30px; /* Size for the person icon */
+            height: 30px;
+            margin-right: 10px;
+        }
+
+        .can-take-from {
+            background-color: #ffe0b2; /* Light orange */
+        }
+
+        .can-give-to {
+            background-color: #bbdefb; /* Light blue */
+        }
+
+        .compatibility-list span {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 1rem;
+            padding: 0.4rem 0.8rem;
+            background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent white for readability */
+            border-radius: 0.3rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        .donation-image-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column; /* To stack text below image */
+            text-align: center;
+        }
+
+        .donation-image-container img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+        }
+
+        .donation-message {
+            margin-top: 1rem;
+            font-size: 1rem;
+            color: #dc3545; /* Red color for the message */
+            font-weight: bold;
+        }
+    .zoom-in {
+  animation: zoomIn 0.6s ease;
+}
+@keyframes zoomIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.learn-about-donation-title {
+    color: #dc3545; /* Red color */
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem; /* Larger font size for the title */
+}
+
+/* Blood Type Selection Box */
+.blood-type-selection {
+    background-color: #fff; /* White background for the selection area */
+    padding: 1.5rem;
+    border-radius: .5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 2.5rem; /* Increased margin-bottom to match spacing */
+}
+
+.blood-type-selection p {
+    margin-bottom: 1rem !important; /* Adjust margin for "Select your Blood Type" */
+    font-size: 1.1rem; /* Slightly larger font */
+    font-weight: 500; /* Medium weight */
+    color: #555; /* Slightly darker muted text */
+}
+
+/* Blood Type Buttons */
+.blood-type-buttons .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 0.3rem;
+    border: 1px solid #dc3545; /* Red border */
+    color: #dc3545; /* Red text */
+    background-color: #fff;
+    transition: all 0.3s ease;
+}
+
+.blood-type-buttons .btn:hover,
+.blood-type-buttons .btn.active,
+.blood-type-buttons .btn-primary-custom { /* This class is added by JS for active state */
+    background-color: #dc3545; /* Red background on hover/active */
+    color: #fff; /* White text on hover/active */
+    border-color: #dc3545;
+}
+
+/* Compatibility Cards (You can take/give from) */
+.compatibility-card {
+    border: none; /* Remove default card border */
+    border-radius: 0.5rem;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    margin-bottom: 1.5rem;
+    overflow: hidden; /* For rounded corners on the background */
+    position: relative; /* Needed for absolute positioning of the icon */
+    padding-left: 70px; /* Make space for the icon by pushing text right */
+}
+
+.compatibility-card .card-body {
+    padding: 1.5rem;
+    /* Adjust padding to fine-tune alignment if needed */
+}
+
+.compatibility-card h4 {
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    display: block; /* Ensure it's not trying to flex with the image anymore */
+    color: #333; /* Darker text for readability */
+}
+
+/* Person Icon inside Compatibility Cards */
+.compatibility-card h4 img {
+    position: absolute;
+    left: 20px; /* Adjust as needed to align with the screenshot */
+    top: 20px; /* Adjust as needed to align with the screenshot */
+    width: 45px; /* Larger size for the person icon */
+    height: 45px;
+    border-radius: 50%; /* Make it round */
+    object-fit: cover; /* Ensure image covers the circle */
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background for the icon */
+    padding: 5px; /* Space inside the circle around the icon */
+    /* If your person-img.png has a background, you might need to adjust or create a silhouette version */
+}
+
+.can-take-from {
+    background-color: #ffe0b2; /* Light orange for "You can take from" */
+}
+
+.can-give-to {
+    background-color: #bbdefb; /* Light blue for "You can give to" */
+}
+
+.compatibility-list span {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-right: 1rem;
+    padding: 0.4rem 0.8rem;
+    background-color: rgba(255, 255, 255, 0.7); /* Slightly transparent white for readability */
+    border-radius: 0.3rem;
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #333; /* Darker text for readability */
+}
+
+/* Main Donation Image Container */
+.donation-image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column; /* To stack text below image */
+    text-align: center;
+    padding-top: 1rem; /* Added padding to push image down slightly */
+}
+
+.donation-image-container img {
+    max-width: 90%; /* Keep it responsive */
+    height: auto;
+    border-radius: 0.5rem; /* Match card border-radius */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+    /* The inline style `max-width: 450px; width: 100%; height: auto;` in your HTML is fine */
+}
+
+.donation-message {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #dc3545; /* Red color for the message */
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) { /* For small to medium devices */
+    .donation-image-container {
+        margin-top: 2rem; /* Add space between compatibility cards and image on smaller screens */
+    }
+}
+.card:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease-in-out;
+}
+.border-left-info {
+  border-left: 5px solid #17a2b8 !important;
+}
+.border-left-success {
+  border-left: 5px solid #28a745 !important;
+}
+.border-left-warning {
+  border-left: 5px solid #ffc107 !important;
+}
+.types-of-donation h2 {
+  font-size: 2rem;
+}
+
+.nav-pills .nav-link {
+  border-radius: 0;
+  color: #555;
+  font-weight: 500;
+  padding: 10px 15px;
+  border-left: 3px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #f8d7da;
+  border-left: 4px solid #dc3545;
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.card {
+  border: none;
+  background: #fff;
+}
+
+.card img {
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.btn-danger {
+  border-radius: 25px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+.types-of-donation-section {
+  background-color: #fff;
+}
+
+.types-of-donation-section h2 {
+  font-size: 2.3rem;
+  font-weight: 700;
+}
+
+.types-of-donation-section p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+}
+
+.nav-pills .nav-link {
+  border-left: 5px solid transparent;
+  border-radius: 0;
+  font-weight: 500;
+  color: #333;
+  padding: 12px 18px;
+  transition: all 0.3s;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #fdecec;
+  color: #dc3545;
+  font-weight: 600;
+  border-left: 5px solid #dc3545;
+}
+
+.donation-card {
+  background-color: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+}
+
+.donation-card img {
+  max-height: 220px;
+  object-fit: cover;
+}
+.custom-tab-pills .nav-link {
+  background-color: #fff0f0; /* Light pink background */
+  color: #7a0000;            /* Darker text for better contrast */
+  font-weight: 600;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #a300;
+  transition: all 0.3s ease;
+}
+
+.custom-tab-pills .nav-link:hover {
+  background-color: #a13d3d;
+  color: #5a0000;
+}
+
+.custom-tab-pills .nav-link.active {
+  background-color: #a30000; /* Deep red background */
+  color: #ffffff;            /* White text for contrast */
+  border-color: #a30000;
+  box-shadow: 0 0 8px rgba(163, 0, 0, 0.4);
+}
+/* Make tab content scrollable */
+.donation-card {
+  max-height: 420px;
+  overflow-y: auto;
+  padding-right: 12px;
+  scrollbar-width: thin;
+  scrollbar-color: #a30000 #ffe5e5;
+}
+
+/* For Webkit-based browsers */
+.donation-card::-webkit-scrollbar {
+  width: 6px;
+}
+.donation-card::-webkit-scrollbar-track {
+  background: #ffe5e5;
+}
+.donation-card::-webkit-scrollbar-thumb {
+  background-color: #a30000;
+  border-radius: 6px;
+}
+
+/* Improve visibility of tab labels */
+.custom-tab-pills .nav-link {
+  background-color: #fff0f0;
+  color: #7a0000;
+  font-weight: 600;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 1px solid #ffc0c0;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.custom-tab-pills .nav-link:hover {
+  background-color: #ffdddd;
+  color: #5a0000;
+}
+
+.custom-tab-pills .nav-link.active {
+  background-color: #a30000;
+  color: #afa2a2;
+  font-weight: 700;
+  box-shadow: 0 0 8px rgba(163, 0, 0, 0.4);
+}
+/* Smooth, modern scrollbar */
+.tab-content::-webkit-scrollbar {
+  width: 6px;
+}
+.tab-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+.tab-content::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}

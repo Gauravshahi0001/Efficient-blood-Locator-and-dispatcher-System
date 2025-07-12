@@ -1,0 +1,52 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Blood Locator Admin</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   <style>
+    .btn-danger.back-btn:hover {
+      background-color: #007bff;
+      border-color: #007bff;
+      color: white;
+    }
+  </style>
+</head>
+<body class="d-flex justify-content-center align-items-center vh-100" style="
+  background: url('images/bg3.jpg') no-repeat center center fixed;
+  background-size: cover;">
+
+  <div class="card p-4 shadow-lg" style="max-width: 400px; width: 100%;">
+    <h3 class="text-center text-danger mb-3">Admin Login</h3>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" placeholder="admin" />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" class="form-control" placeholder="password" />
+    </div>
+    <button class="btn btn-danger btn-block" onclick="login()">Login</button>
+    <p id="login-error" class="text-danger mt-2 text-center"></p>
+  <a href="index.html" class="btn btn-danger back-btn">← Back to Home</a>
+
+
+  </div>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value;
+      const pass = document.getElementById('password').value;
+      if (user === 'admin' && pass === 'admin123') {
+        localStorage.setItem('isLoggedIn', 'true');
+        window.location.href = 'admin.html';
+      } else {
+        document.getElementById('login-error').textContent = "Invalid credentials!";
+      }
+    }
+  </script>
+</body>
+</html>

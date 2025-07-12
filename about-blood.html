@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn About Donation</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/icon.png" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-image: url('images/bg2.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: 0;
+    }
+    .overlay {
+      background-color: rgba(255, 255, 255, 0.92);
+      min-height: 100vh;
+    }
+    .navbar {
+      background: linear-gradient(to right,  #a30000, #001F5B);
+    }
+    .navbar-brand span {
+      color: white;
+      font-size: 1.8rem;
+    }
+    .title {
+      text-align: center;
+      color: #b3001b;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 2rem 0;
+    }
+    .blood-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .blood-buttons button {
+      border: 1px solid #b3001b;
+      background-color: #fff;
+      color: #b3001b;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .blood-buttons button.active,
+    .blood-buttons button:hover {
+      background-color: #b3001b;
+      color: white;
+    }
+    .info-boxes {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0 1rem 3rem;
+      align-items: center;
+    }
+    .info-box {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 1rem;
+      padding: 2rem;
+      font-size: 1.2rem;
+    }
+    .take-box {
+      background-color: #ffd6a5;
+    }
+    .give-box {
+      background-color: #a5d8ff;
+    }
+    .info-box h5 {
+      font-weight: 700;
+    }
+    .person-icon {
+      width: 40px;
+      height: 40px;
+      background-color: #d9a679;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .image-box {
+      max-width: 500px;
+      text-align: center;
+    }
+    .image-box img {
+      width: 100%;
+      max-width: 400px;
+    }
+    .image-box p {
+      font-weight: 500;
+      margin-top: 0.5rem;
+    }
+    .highlight {
+      color: #b3001b;
+      font-weight: 700;
+    }
+    footer {
+      background: linear-gradient(to right, #a30000, #001F5B );
+      color: white;
+      text-align: center;
+      padding: 12px 0;
+    }
+    .card-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .card-box {
+      width: 280px;
+      padding: 1.5rem;
+      background-color: #f9f9f9;
+      border-radius: 1rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .card-box:hover {
+      transform: scale(1.05);
+    }
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #A60000;
+      margin-bottom: 0.5rem;
+    }
+    .card-box p {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="images/logo.png" alt="BloodSync Logo" width="80" height="75" class="rounded-circle mr-2">
+        <span class="font-weight-bold">BloodSyno</span>
+      </a>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-white" href="index.html">Home</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container text-center">
+      <div class="title">Learn About Donation</div>
+      <div class="blood-buttons">
+        <button onclick="selectType('A+')">A+</button>
+        <button onclick="selectType('O+')">O+</button>
+        <button onclick="selectType('B+')">B+</button>
+        <button onclick="selectType('AB+')">AB+</button>
+        <button onclick="selectType('A-')">A-</button>
+        <button onclick="selectType('O-')">O-</button>
+        <button onclick="selectType('B-')">B-</button>
+        <button onclick="selectType('AB-')">AB-</button>
+      </div>
+
+      <div class="info-boxes">
+        <div>
+          <div class="info-box take-box">
+            <div><span class="person-icon"></span><h5>You can take from</h5></div>
+            <div id="canTake">Select a blood type</div>
+          </div>
+          <div class="info-box give-box mt-4">
+            <div><span class="person-icon" style="background-color:#7fb3d5;"></span><h5>You can give to</h5></div>
+            <div id="canGive">Select a blood type</div>
+          </div>
+        </div>
+        <div class="image-box">
+          <img src="https://eraktkosh.mohfw.gov.in/eraktkoshPortal/assets/images/doctor.png" alt="Blood Donation Illustration">
+          <p>One Blood Donation can save up to <span class="highlight">Three Lives</span></p>
+        </div>
+      </div>
+
+      <div class="card-section">
+        <div class="card-box">
+          <div class="card-title">🎯 Eligibility Quiz</div>
+          <p>Test if you're eligible to donate blood through an interactive quiz.</p>
+        </div>
+        <div class="card-box">
+          <div class="card-title">🛡️ Safety Mission</div>
+          <p>Learn the safe steps of blood donation by completing a safety challenge.</p>
+        </div>
+        <div class="card-box">
+          <div class="card-title">🎮 Match the Types</div>
+          <p>Drag and drop different blood types to their compatible matches!</p>
+        </div>
+        <div class="card-box">
+          <div class="card-title">🏆 Donation Streak</div>
+          <p>Track your donation history and earn virtual badges!</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+ <footer class="text-white text-center py-3 fixed-bottom gradient-header-footer">
+    <div class="container">
+      <div class="mb-2">
+        <a href="https://facebook.com" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook">
+        </a>
+        <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733585.png" alt="WhatsApp">
+        </a>
+        <a href="https://instagram.com" target="_blank" class="text-white mx-2">
+          <img src="https://cdn-icons-png.flaticon.com/24/733/733558.png" alt="Instagram">
+        </a>
+        <a href="https://linkedIn.com" target="_blank" class="text-white mx-2">
+    <img src="https://cdn-icons-png.flaticon.com/24/174/174857.png" alt="LinkedIn">
+</a>
+      </div>
+      <p class="mb-0">© 2025 BloodSync. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const compatibility = {
+      "O-": { take: ["O-"], give: ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"] },
+      "O+": { take: ["O-", "O+"], give: ["O+", "A+", "B+", "AB+"] },
+      "A-": { take: ["O-", "A-"], give: ["A-", "A+", "AB-", "AB+"] },
+      "A+": { take: ["O-", "O+", "A-", "A+"], give: ["A+", "AB+"] },
+      "B-": { take: ["O-", "B-"], give: ["B-", "B+", "AB-", "AB+"] },
+      "B+": { take: ["O-", "O+", "B-", "B+"], give: ["B+", "AB+"] },
+      "AB-": { take: ["O-", "A-", "B-", "AB-"], give: ["AB-", "AB+"] },
+      "AB+": { take: ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"], give: ["AB+"] }
+    };
+
+    function selectType(type) {
+      const buttons = document.querySelectorAll('.blood-buttons button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      document.getElementById("canTake").textContent = compatibility[type].take.join("  ");
+      document.getElementById("canGive").textContent = compatibility[type].give.join("  ");
+    }
+  </script>
+</body>
+</html>

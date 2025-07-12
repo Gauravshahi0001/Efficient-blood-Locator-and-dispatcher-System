@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blood Availability</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+  html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  body {
+    background-image: url('images/bg5.png');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+  }
+  .btn-custom {
+  background: linear-gradient(45deg, #a30000, #0056b3); /* Red to Blue */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-custom:hover {
+  transform: scale(1.03);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+/* Remove if unused */
+.bg-custom-red {
+  background-color: #a30000!important;
+}
+
+.footer-gradient {
+  background: linear-gradient(45deg, #a30000, #0056b3); /* Same red to blue gradient */
+  color: white;
+  padding: 20px 0;
+  text-align: center;
+}
+.navbar-gradient {
+  background: linear-gradient(90deg, #a30000, #0056b3); /* Red to Blue gradient */
+  color: white;
+}
+
+
+
+  .bg-custom-red {
+    background-color: #a30000 !important;
+  }
+
+  body > .container,
+  body > section.container {
+    flex: 1;
+  }
+
+  .container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+  }
+</style>
+
+</head>
+
+<body>
+  <!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark navbar-gradient">
+  <a class="navbar-brand d-flex align-items-center" href="#">
+    <img src="images/logo.png" alt="Logo" width="80" height="75" class="rounded-circle mr-2">
+    <span>BloodSync</span>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+      <li class="nav-item"><a class="nav-link" href="donate.html">WANT TO DONATE BLOOD</a></li>
+      <li class="nav-item"><a class="nav-link active" href="lookingforblood.html">LOOKING FOR BLOOD</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+  <!-- Availability Checker -->
+  <section class="container my-5">
+    <h2 class="text-center text-danger mb-4">Check Blood Availability</h2>
+    
+    <form id="availabilityForm" class="mb-4">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="state">Select State</label>
+          <select class="form-control" id="state">
+            <option selected disabled>Choose...</option>
+           <option selected disabled>Choose...</option>
+<option>Andhra Pradesh</option>
+<option>Arunachal Pradesh</option>
+<option>Assam</option>
+<option>Bihar</option>
+<option>Chhattisgarh</option>
+<option>Goa</option>
+<option>Gujarat</option>
+<option>Haryana</option>
+<option>Himachal Pradesh</option>
+<option>Jharkhand</option>
+<option>Karnataka</option>
+<option>Kerala</option>
+<option>Madhya Pradesh</option>
+<option>Maharashtra</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Odisha</option>
+<option>Punjab</option>
+<option>Rajasthan</option>
+<option>Sikkim</option>
+<option>Tamil Nadu</option>
+<option>Telangana</option>
+<option>Tripura</option>
+<option>Uttar Pradesh</option>
+<option>Uttarakhand</option>
+<option>West Bengal</option>
+<option>Andaman and Nicobar Islands</option>
+<option>Chandigarh</option>
+<option>Dadra and Nagar Haveli and Daman and Diu</option>
+<option>Delhi</option>
+<option>Jammu and Kashmir</option>
+<option>Ladakh</option>
+<option>Lakshadweep</option>
+<option>Puducherry</option>
+
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="bloodGroup">Select Blood Group</label>
+          <select class="form-control" id="bloodGroup">
+            <option selected disabled>Choose...</option>
+            <option>A+</option>
+            <option>B+</option>
+            <option>O+</option>
+            <option>AB+</option>
+            <option>A-</option>
+            <option>B-</option>
+            <option>O-</option>
+            <option>AB-</option>
+          </select>
+        </div>
+      </div>
+     <button type="button" class="btn btn-block btn-custom" onclick="checkAvailability()">Check Availability</button>
+
+    </form>
+
+    <!-- Results Table -->
+    <div id="results" class="table-responsive d-none">
+      <table class="table table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Blood Bank</th>
+            <th>District</th>
+            <th>City</th>
+            <th>Contact</th>
+            <th>Available Units</th>
+          </tr>
+        </thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Script -->
+  <script>
+  function checkAvailability() {
+    const state = document.getElementById('state').value;
+    const bloodGroup = document.getElementById('bloodGroup').value;
+    const tbody = document.getElementById('resultBody');
+    const table = document.getElementById('results');
+
+    tbody.innerHTML = "";
+
+    // Check if both fields are selected
+    if (state === "Choose..." || bloodGroup === "Choose...") {
+      table.classList.add('d-none');
+      alert("Please select both state and blood group.");
+      return;
+    }
+
+    // Sample Data (replace with real-time DB/API data later)
+    const sampleData = [
+  {
+    name: "AIIMS Delhi",
+    district: "New Delhi",
+    city: "Delhi",
+    contact: "011-26588500",
+    state: "Delhi",
+    stock: { "A+": 12, "B+": 5, "O+": 8, "AB+": 2, "A-": 0, "B-": 3, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "IGIMS Blood Bank",
+    district: "Patna",
+    city: "Patna",
+    contact: "0612-2297225",
+    state: "Bihar",
+    stock: { "A+": 4, "B+": 3, "O+": 6, "AB+": 1, "A-": 1, "B-": 0, "O-": 2, "AB-": 0 }
+  },
+  {
+    name: "JJ Hospital",
+    district: "Mumbai",
+    city: "Mumbai",
+    contact: "022-23735555",
+    state: "Maharashtra",
+    stock: { "A+": 7, "B+": 6, "O+": 5, "AB+": 2, "A-": 1, "B-": 1, "O-": 0, "AB-": 2 }
+  },
+  {
+    name: "Kolkata Medical College",
+    district: "Kolkata",
+    city: "Kolkata",
+    contact: "033-22551651",
+    state: "West Bengal",
+    stock: { "A+": 6, "B+": 7, "O+": 3, "AB+": 2, "A-": 1, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Chennai GH Blood Bank",
+    district: "Chennai",
+    city: "Chennai",
+    contact: "044-25305000",
+    state: "Tamil Nadu",
+    stock: { "A+": 8, "B+": 3, "O+": 10, "AB+": 4, "A-": 2, "B-": 2, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Osmania General Hospital",
+    district: "Hyderabad",
+    city: "Hyderabad",
+    contact: "040-23538846",
+    state: "Telangana",
+    stock: { "A+": 7, "B+": 6, "O+": 5, "AB+": 1, "A-": 0, "B-": 2, "O-": 2, "AB-": 1 }
+  },
+  {
+    name: "SGPGIMS",
+    district: "Lucknow",
+    city: "Lucknow",
+    contact: "0522-2494000",
+    state: "Uttar Pradesh",
+    stock: { "A+": 4, "B+": 8, "O+": 7, "AB+": 3, "A-": 0, "B-": 0, "O-": 2, "AB-": 0 }
+  },
+  {
+    name: "GMERS Gandhinagar",
+    district: "Gandhinagar",
+    city: "Gandhinagar",
+    contact: "079-23250800",
+    state: "Gujarat",
+    stock: { "A+": 5, "B+": 2, "O+": 5, "AB+": 1, "A-": 1, "B-": 0, "O-": 1, "AB-": 2 }
+  },
+  {
+    name: "SMS Hospital",
+    district: "Jaipur",
+    city: "Jaipur",
+    contact: "0141-2518290",
+    state: "Rajasthan",
+    stock: { "A+": 2, "B+": 3, "O+": 4, "AB+": 0, "A-": 1, "B-": 1, "O-": 0, "AB-": 0 }
+  },
+  {
+    name: "IGMC Shimla",
+    district: "Shimla",
+    city: "Shimla",
+    contact: "0177-2658339",
+    state: "Himachal Pradesh",
+    stock: { "A+": 3, "B+": 4, "O+": 5, "AB+": 1, "A-": 0, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "SCB Medical College",
+    district: "Cuttack",
+    city: "Cuttack",
+    contact: "0671-2414307",
+    state: "Odisha",
+    stock: { "A+": 3, "B+": 3, "O+": 4, "AB+": 2, "A-": 1, "B-": 0, "O-": 1, "AB-": 1 }
+  },
+  {
+    name: "BPKIHS Blood Bank",
+    district: "Gangtok",
+    city: "Gangtok",
+    contact: "03592-232940",
+    state: "Sikkim",
+    stock: { "A+": 1, "B+": 0, "O+": 2, "AB+": 1, "A-": 0, "B-": 0, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "RIMS Ranchi",
+    district: "Ranchi",
+    city: "Ranchi",
+    contact: "0651-2541533",
+    state: "Jharkhand",
+    stock: { "A+": 2, "B+": 1, "O+": 3, "AB+": 0, "A-": 1, "B-": 0, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Apollo Bhopal",
+    district: "Bhopal",
+    city: "Bhopal",
+    contact: "0755-4270100",
+    state: "Madhya Pradesh",
+    stock: { "A+": 6, "B+": 3, "O+": 5, "AB+": 2, "A-": 0, "B-": 0, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "AIIMS Raipur",
+    district: "Raipur",
+    city: "Raipur",
+    contact: "0771-2971101",
+    state: "Chhattisgarh",
+    stock: { "A+": 5, "B+": 4, "O+": 5, "AB+": 1, "A-": 1, "B-": 1, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Civil Hospital Aizawl",
+    district: "Aizawl",
+    city: "Aizawl",
+    contact: "0389-2301690",
+    state: "Mizoram",
+    stock: { "A+": 2, "B+": 2, "O+": 2, "AB+": 0, "A-": 0, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "JNIMS Blood Bank",
+    district: "Imphal",
+    city: "Imphal",
+    contact: "0385-2443144",
+    state: "Manipur",
+    stock: { "A+": 3, "B+": 1, "O+": 2, "AB+": 1, "A-": 1, "B-": 0, "O-": 0, "AB-": 0 }
+  },
+  {
+    name: "Gauhati Medical College",
+    district: "Guwahati",
+    city: "Guwahati",
+    contact: "0361-2132751",
+    state: "Assam",
+    stock: { "A+": 4, "B+": 3, "O+": 3, "AB+": 2, "A-": 0, "B-": 1, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "IGGDC Blood Bank",
+    district: "Itanagar",
+    city: "Itanagar",
+    contact: "0360-2290330",
+    state: "Arunachal Pradesh",
+    stock: { "A+": 1, "B+": 0, "O+": 1, "AB+": 0, "A-": 0, "B-": 0, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Shillong Civil Hospital",
+    district: "Shillong",
+    city: "Shillong",
+    contact: "0364-2224100",
+    state: "Meghalaya",
+    stock: { "A+": 2, "B+": 1, "O+": 2, "AB+": 1, "A-": 1, "B-": 0, "O-": 0, "AB-": 0 }
+  },
+  {
+    name: "Agartala Govt Medical College",
+    district: "Agartala",
+    city: "Agartala",
+    contact: "0381-2313002",
+    state: "Tripura",
+    stock: { "A+": 2, "B+": 2, "O+": 3, "AB+": 1, "A-": 0, "B-": 0, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "RNT Medical College",
+    district: "Udaipur",
+    city: "Udaipur",
+    contact: "0294-2418707",
+    state: "Rajasthan",
+    stock: { "A+": 3, "B+": 2, "O+": 2, "AB+": 0, "A-": 1, "B-": 1, "O-": 0, "AB-": 0 }
+  },
+  {
+    name: "PGIMER Blood Bank",
+    district: "Chandigarh",
+    city: "Chandigarh",
+    contact: "0172-2746018",
+    state: "Punjab",
+    stock: { "A+": 5, "B+": 6, "O+": 4, "AB+": 2, "A-": 1, "B-": 0, "O-": 0, "AB-": 1 }
+  },
+  {
+    name: "Civil Hospital Panaji",
+    district: "Panaji",
+    city: "Panaji",
+    contact: "0832-2225646",
+    state: "Goa",
+    stock: { "A+": 1, "B+": 2, "O+": 2, "AB+": 1, "A-": 0, "B-": 1, "O-": 0, "AB-": 0 }
+  },
+  {
+    name: "Shimoga Blood Bank",
+    district: "Shimoga",
+    city: "Shimoga",
+    contact: "08182-227295",
+    state: "Karnataka",
+    stock: { "A+": 3, "B+": 3, "O+": 3, "AB+": 2, "A-": 1, "B-": 0, "O-": 1, "AB-": 0 }
+  },
+  {
+    name: "Govt Hospital Thiruvananthapuram",
+    district: "Thiruvananthapuram",
+    city: "Thiruvananthapuram",
+    contact: "0471-2528276",
+    state: "Kerala",
+    stock: { "A+": 5, "B+": 4, "O+": 6, "AB+": 3, "A-": 2, "B-": 1, "O-": 1, "AB-": 1 }
+  },
+  {
+    name: "Puducherry Govt Hospital",
+    district: "Puducherry",
+    city: "Puducherry",
+    contact: "0413-2277290",
+    state: "Puducherry",
+    stock: { "A+": 2, "B+": 1, "O+": 2, "AB+": 1, "A-": 0, "B-": 0, "O-": 1, "AB-": 0 }
+  }
+];
+
+
+    const filtered = sampleData.filter(
+      entry => entry.state === state && entry.stock[bloodGroup] > 0
+    );
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="5" class="text-center text-danger">
+        No availability for ${bloodGroup} in ${state}.
+      </td></tr>`;
+    } else {
+      filtered.forEach(entry => {
+        const row = `
+          <tr>
+            <td>${entry.name}</td>
+            <td>${entry.district}</td>
+            <td>${entry.city}</td>
+            <td>${entry.contact}</td>
+            <td>${entry.stock[bloodGroup]} unit(s)</td>
+          </tr>`;
+        tbody.innerHTML += row;
+      });
+    }
+
+    table.classList.remove('d-none');
+  }
+</script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="footer-gradient mt-5">
+  <p class="mb-1">&copy; 2025 BloodSync. All Rights Reserved.</p>
+  <small>❤️ Together we save lives — Donate blood, save a life!</small>
+</footer>
+
+
+</body>
+
+</html>

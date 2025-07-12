@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BloodSync | Live Dashboard</title>
+
+  <!-- Bootstrap 5 & Chart.js -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    /* ———  GLOBAL  ——— */
+    html,body{height:100%;margin:0;font-family:"Segoe UI",sans-serif;}
+    body{
+      background:url('images/bg1.jpg') center/cover no-repeat fixed;
+      display:flex;flex-direction:column;
+    }
+
+    header,footer{background:#004d99;color:#fff;}
+    h4{color:#fff}
+
+    main{flex:1;}
+
+    /* nice translucent card‑wrapper */
+    .overlay{
+      background:rgba(255,255,255,.92);
+      border-radius:8px;
+      padding:20px;
+      margin-top:20px;
+    }
+
+    select.form-select{border-color:#004d99;border-width:2px;}
+
+    /* prevent x‑axis labels from overlapping badly */
+    canvas{max-height:420px}
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="py-3 shadow-sm">
+    <div class="container-fluid d-flex justify-content-between align-items-center flex-wrap">
+      <div class="d-flex align-items-center mb-3 mb-md-0">
+        <img src="images/logo.png" width="80" height="75" class="me-3 rounded-circle" alt="BloodSync logo">
+        <h4 class="mb-0">BloodSync | Live Dashboard</h4>
+      </div>
+
+      <select id="stateDropdown" class="form-select w-auto" onchange="filterByState()">
+        <option selected disabled>Select State</option>
+        <option>All</option>
+        <!-- (long list of states) -->
+        <optgroup label="Major States">
+          <option>Uttar Pradesh</option><option>Maharashtra</option><option>Delhi</option>
+          <option>Bihar</option><option>Tamil Nadu</option><option>Karnataka</option>
+          <option>Gujarat</option><option>Rajasthan</option>
+        </optgroup>
+        <optgroup label="Other States / UTs">
+          <option>Andhra Pradesh</option><option>Telangana</option><option>West Bengal</option>
+          <option>Madhya Pradesh</option><option>Odisha</option><option>Kerala</option>
+          <option>Punjab</option><option>Assam</option><option>Chhattisgarh</option>
+          <option>Haryana</option><option>Uttarakhand</option><option>Himachal Pradesh</option>
+          <option>Goa</option><option>Jharkhand</option><option>Tripura</option><option>Meghalaya</option>
+          <option>Manipur</option><option>Nagaland</option><option>Mizoram</option><option>Sikkim</option>
+          <option>Arunachal Pradesh</option><option>Andaman & Nicobar Islands</option>
+          <option>Chandigarh</option><option>Dadra & Nagar Haveli and Daman & Diu</option>
+          <option>Lakshadweep</option><option>Puducherry</option><option>Jammu & Kashmir</option>
+          <option>Ladakh</option>
+        </optgroup>
+      </select>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="container my-4">
+    <div class="overlay">
+
+      <!-- Charts row -->
+      <div class="row g-4">
+        <!-- Blood units -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <h5 class="card-title text-danger mb-3">Live Blood Availability</h5>
+              <input type="date" class="form-control form-control-sm mb-3">
+              <canvas id="bloodChart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- Donor totals -->
+        <div class="col-lg-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="card-title text-success">Total Registered Donors</h5>
+                <button class="btn btn-outline-secondary btn-sm" onclick="toggleChartType()">Switch Chart Type</button>
+              </div>
+              <canvas id="donorChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Register button -->
+      <div class="text-center my-4">
+        <a href="donor-register.html" class="btn btn-success btn-lg">Register to Donate</a>
+      </div>
+
+      <!-- Camps table -->
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <h5 class="card-title text-danger">Upcoming Blood Donation Camps</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped align-middle">
+              <thead class="table-primary text-center">
+                <tr><th>Date</th><th>Venue</th><th>City</th><th>Contact</th><th></th></tr>
+              </thead>
+              <tbody class="text-center">
+                <tr><td>2025‑07‑10</td><td>Red Cross Hall</td><td>Delhi</td><td>9876543210</td><td><button class="btn btn-sm btn-success">Register</button></td></tr>
+                <tr><td>2025‑07‑15</td><td>AIIMS Auditorium</td><td>Patna</td><td>9123456780</td><td><button class="btn btn-sm btn-success">Register</button></td></tr>
+                <tr><td>2025‑07‑18</td><td>City Hospital</td><td>Lucknow</td><td>9012345678</td><td><button class="btn btn-sm btn-success">Register</button></td></tr>
+                <tr><td>2025‑07‑20</td><td>Apollo Blood Bank</td><td>Chennai</td><td>9345678901</td><td><button class="btn btn-sm btn-success">Register</button></td></tr>
+                <tr><td>2025‑07‑25</td><td>National Blood Center</td><td>Mumbai</td><td>9988776655</td><td><button class="btn btn-sm btn-success">Register</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /overlay -->
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="py-3 text-center">
+    <small>© 2025 BloodSync. All rights reserved.</small>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    /* ——— RANDOM DONOR DATA ——— */
+    const states = [
+      'Andhra Pradesh','Arunachal Pradesh','Assam','Bihar','Chhattisgarh','Goa','Gujarat','Haryana',
+      'Himachal Pradesh','Jharkhand','Karnataka','Kerala','Madhya Pradesh','Maharashtra','Manipur',
+      'Meghalaya','Mizoram','Nagaland','Odisha','Punjab','Rajasthan','Sikkim','Tamil Nadu',
+      'Telangana','Tripura','Uttar Pradesh','Uttarakhand','West Bengal','Delhi','Jammu & Kashmir',
+      'Ladakh','Puducherry','Andaman & Nicobar Islands','Chandigarh',
+      'Dadra & Nagar Haveli and Daman & Diu','Lakshadweep'
+    ];
+
+    const MIN=250000, MAX=950000;
+    function randomData(){
+      return states.map(s=>({state:s, donors:Math.floor(Math.random()*(MAX-MIN+1))+MIN}));
+    }
+
+    /* ——— DONOR CHART ——— */
+    let chartType='bar', donorChart;
+    function buildOrUpdateDonor(data){
+      const ctx=document.getElementById('donorChart').getContext('2d');
+      const labels=data.map(d=>d.state);
+      const vals=data.map(d=>d.donors);
+      if(donorChart){
+        donorChart.config.type=chartType;
+        donorChart.data.labels=labels;
+        donorChart.data.datasets[0].data=vals;
+        donorChart.update();
+      }else{
+        donorChart=new Chart(ctx,{
+          type:chartType,
+          data:{
+            labels,
+            datasets:[{label:'Donors',data:vals,backgroundColor:'#198754',borderColor:'#198754',fill:chartType==='line'}]
+          },
+          options:{
+            plugins:{legend:{display:false}},
+            animation:{duration:800},
+            responsive:true,
+            scales:{
+              x:{ticks:{autoSkip:false,maxRotation:60}},
+              y:{beginAtZero:true,title:{display:true,text:'Donors'}}
+            }
+          }
+        });
+      }
+    }
+
+    function toggleChartType(){
+      chartType=chartType==='bar'?'line':'bar';
+      buildOrUpdateDonor(randomData());
+    }
+
+    /* ——— BLOOD UNITS CHART ——— */
+    new Chart(document.getElementById('bloodChart'),{
+      type:'bar',
+      data:{
+        labels:['A+','A-','B+','B-','AB+','AB-','O+','O-'],
+        datasets:[{label:'Units',data:[431666,31676,624169,41064,659585,44904,184988,14266],backgroundColor:'#dc3545'}]
+      },
+      options:{plugins:{legend:{display:false}}}
+    });
+
+    /* ——— STATE DROPDOWN (demo alert) ——— */
+    function filterByState(){
+      const val=document.getElementById('stateDropdown').value;
+      if(val!=='All') alert('Filtering by state: '+val); // replace with real logic
+    }
+
+    /* ——— INIT ——— */
+    buildOrUpdateDonor(randomData());
+    setInterval(()=>buildOrUpdateDonor(randomData()),5000);
+  </script>
+</body>
+</html>
